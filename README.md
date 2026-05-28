@@ -1,4 +1,4 @@
-# 🫟 PixelForge Tech 🫟
+ PixelForge Tech
 
 > **The Digital Home for Creators** — A cyberpunk-dark themed single-page web app for the PixelForge Tech community channel.
 
@@ -6,30 +6,30 @@
 
  Live Demo
 
-👉 [View Site](https://maxorleans55.github.io/pixelforge-tech/)
+ [View Site](https://maxorleans55.github.io/pixelforge-tech/)
 
 ---
 
-## ✨ Features
+Features
 
-- 🌙 **Dark / Light Mode Toggle** — Cyberpunk-dark default with smooth theme switching
-- 🎞️ **Animated Hero Section** — Floating avatar, letter-by-letter title entrance, typewriter effect
-- ⚡ **Tech Ticker** — Seamless scrolling marquee of 23 tech topics
-- 📊 **Animated Stats** — Count-up counters triggered on scroll
-- 🃏 **Topics Cards** — Staggered entrance with neon glow hover effects
-- 🛠️ **Dev Toolkit** — Three fully functional browser tools:
-  - 🔑 Password Generator (length slider, charset toggles, strength meter)
-  - 🎨 Color Palette Generator (expandable swatches, presets, copy-to-clipboard)
-  - 🔡 Base64 Encoder / Decoder
-- 🗡️ **Anime Zone** — 6 hand-crafted SVG anime characters with parallax scroll + floating animation
-- 💬 **WhatsApp Section** — Direct link to community channel
-- ✈️ **Telegram Channels** — Grid of 10 community channel cards
-- 👨‍💻 **Connect Section** — Creator profile card with Portfolio, GitHub & WhatsApp links
-- 📱 **Responsive** — Mobile-friendly layout
+**Dark / Light Mode Toggle** — Cyberpunk-dark default with smooth theme switching
+-  **Animated Hero Section** — Floating avatar, letter-by-letter title entrance, typewriter effect
+- **Tech Ticker** — Seamless scrolling marquee of 23 tech topics
+- **Animated Stats** — Count-up counters triggered on scroll
+- **Topics Cards** — Staggered entrance with neon glow hover effects
+- **Dev Toolkit** — Three fully functional browser tools:
+  - Password Generator (length slider, charset toggles, strength meter)
+  - Color Palette Generator (expandable swatches, presets, copy-to-clipboard)
+  - Base64 Encoder / Decoder
+- **Anime Zone** — 6 hand-crafted SVG anime characters with parallax scroll + floating animation
+- **WhatsApp Section** — Direct link to community channel
+-  **Telegram Channels** — Grid of 10 community channel cards
+- **Connect Section** — Creator profile card with Portfolio, GitHub & WhatsApp links
+- **Responsive** — Mobile-friendly layout
 
 ---
 
-## 🎨 Tech Stack
+## Tech Stack
 
 | Technology | Usage |
 |---|---|
@@ -42,7 +42,7 @@
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 pixelforge-tech/
@@ -61,7 +61,7 @@ pixelforge-tech/
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### Option 1 — Open Directly
 Just open `index.html` in any browser. No server needed.
@@ -83,17 +83,17 @@ npx serve .
 
 ---
 
-## 🔗 Community Links
+## Community Links
 
 | Platform | Link |
 |---|---|
-| 💬 WhatsApp Channel | [Join Now](https://whatsapp.com/channel/0029Vb6rpEcBVJl1VDOy323z) |
-| 🐙 GitHub | [@Maxorleans55](https://github.com/Maxorleans55) |
-| 🌐 Portfolio | [maxorleans55.github.io](https://maxorleans55.github.io/Portfolio-Application-/) |
+| WhatsApp Channel | [Join Now](https://whatsapp.com/channel/0029Vb6rpEcBVJl1VDOy323z) |
+|  GitHub | [@Maxorleans55](https://github.com/Maxorleans55) |
+| Portfolio | [maxorleans55.github.io](https://maxorleans55.github.io/Portfolio-Application-/) |
 
 ---
 
-## 📺 Telegram Channels
+##  Telegram Channels
 
 | Channel | Handle |
 |---|---|
@@ -110,30 +110,30 @@ npx serve .
 
 ---
 
-## 🌟 Anime Zone
+## Anime Zone
 
 Characters featured with hand-crafted SVG illustrations:
 
-- 🟠 **Naruto** — Uzumaki Naruto (Naruto)
-- 🟡 **Luffy** — Monkey D. Luffy (One Piece)
-- ⚡ **Goku** — Son Goku SSJ (Dragon Ball Z)
-- 🔵 **Gojo** — Satoru Gojo (Jujutsu Kaisen)
-- 🩷 **Tanjiro** — Kamado Tanjiro (Demon Slayer)
-- 🟢 **Levi** — Ackerman Levi (Attack on Titan)
+-  **Naruto** — Uzumaki Naruto (Naruto)
+- **Luffy** — Monkey D. Luffy (One Piece)
+- **Goku** — Son Goku SSJ (Dragon Ball Z)
+-  **Gojo** — Satoru Gojo (Jujutsu Kaisen)
+- **Tanjiro** — Kamado Tanjiro (Demon Slayer)
+- **Levi** — Ackerman Levi (Attack on Titan)
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Max Orleans**  
 Developer · Creator · PixelForge Tech
 
-- 🌐 [Portfolio](https://maxorleans55.github.io/Portfolio-Application-/)
-- 🐙 [GitHub](https://github.com/Maxorleans55)
-- 💬 [WhatsApp Channel](https://whatsapp.com/channel/0029Vb6rpEcBVJl1VDOy323z)
+-  [Portfolio](https://maxorleans55.github.io/Portfolio-Application-/)
+-  [GitHub](https://github.com/Maxorleans55)
+- [WhatsApp Channel](https://whatsapp.com/channel/0029Vb6rpEcBVJl1VDOy323z)
 
 ---
 
-## 📄 License
+## License
 
 © 2026 PixelForge Tech. All rights reserved.
