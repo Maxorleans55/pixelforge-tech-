@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio Builder - PixelForge Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode.js/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+/* ── DESIGN SYSTEM TOKENS ── */
+:root{
+  --bg:#080810;
+  --bg2:#0c0c1a;
+  --bg3:#10101f;
+  --surface:#13132a;
+  --surface2:#181830;
+  --blue:#3b7bff;
+  --blue-dim:#3b7bff22;
+  --purple:#9d5cff;
+  --purple-dim:#9d5cff22;
+  --cyan:#00d4ff;
+  --cyan-dim:#00d4ff20;
+  --pink:#ff3fa4;
+  --pink-dim:#ff3fa422;
+  --amber:#ffaa00;
+  --green:#00e676;
+  --text:#eef0fb;
+  --text-muted:#7880a8;
+  --text-faint:#464870;
+  --border:#1a1a3a;
+  --border-bright:#2a2a5a;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:16px;
+  --radius-xl:22px;
+  --transition:150ms cubic-bezier(.4,0,.2,1);
+  --transition-md:250ms cubic-bezier(.4,0,.2,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+  transition:background var(--transition-md),color var(--transition-md);
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3 { font-family:'Orbitron',monospace; letter-spacing:-.01em; }
+
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--blue); border-radius:3px; }
+
+/* ── CONTAINER ── */
+.container {
+  max-width:1200px;
+  margin:0 auto;
+  padding:2rem;
+}
+
+/* ── HEADER ── */
+.header {
+  background:linear-gradient(135deg,rgba(59,123,255,.1),rgba(0,212,255,.05));
+  border-bottom:1px solid var(--border);
+  padding:2rem 0;
+  margin-bottom:3rem;
+}
+
+.header h1 {
+  font-size:2.5rem;
+  background:linear-gradient(135deg,var(--cyan),var(--blue));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:0.5rem;
+}
+
+.header p {
+  color:var(--text-muted);
+  font-size:1.1rem;
+}
+
+/* ── MAIN LAYOUT ── */
+.builder-layout {
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:2rem;
+  align-items:start;
+}
+
+@media(max-width:1024px) {
+  .builder-layout { grid-template-columns:1fr; }
+}
+
+/* ── FORM SECTION ── */
+.form-section {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+}
+
+.form-section h2 {
+  font-size:1.3rem;
+  color:var(--cyan);
+  margin-bottom:1.5rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+
+.form-group {
+  margin-bottom:1.5rem;
+}
+
+.form-group label {
+  display:block;
+  font-size:0.85rem;
+  font-weight:600;
+  color:var(--text);
+  margin-bottom:0.5rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.form-group.required label::after {
+  content:' *';
+  color:var(--pink);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width:100%;
+  padding:0.75rem 1rem;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  color:var(--text);
+  font-family:inherit;
+  font-size:0.95rem;
+  transition:all var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline:none;
+  border-color:var(--blue);
+  background:var(--bg3);
+  box-shadow:0 0 0 3px var(--blue-dim);
+}
+
+.form-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+@media(max-width:768px) {
+  .form-row { grid-template-columns:1fr; }
+}
+
+.file-upload {
+  position:relative;
+  cursor:pointer;
+}
+
+.file-upload input[type="file"] {
+  display:none;
+}
+
+.file-upload-label {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.75rem;
+  padding:1.5rem;
+  background:var(--surface2);
+  border:2px dashed var(--border-bright);
+  border-radius:var(--radius-md);
+  color:var(--text-muted);
+  transition:all var(--transition);
+  cursor:pointer;
+}
+
+.file-upload:has(input:focus) .file-upload-label {
+  border-color:var(--blue);
+  background:var(--blue-dim);
+}
+
+.file-upload-label:hover {
+  border-color:var(--blue);
+  background:var(--blue-dim);
+}
+
+.file-name {
+  color:var(--cyan);
+  font-weight:600;
+  font-size:0.9rem;
+}
+
+.skills-input {
+  display:flex;
+  gap:0.5rem;
+  margin-bottom:1rem;
+}
+
+.skills-input input {
+  flex:1;
+}
+
+.skills-input button {
+  padding:0.75rem 1rem;
+  background:var(--blue);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius-md);
+  cursor:pointer;
+  font-weight:600;
+  transition:all var(--transition);
+}
+
+.skills-input button:hover {
+  background:var(--purple);
+  transform:translateY(-2px);
+}
+
+.skills-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+
+.skill-tag {
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.5rem 1rem;
+  background:var(--blue-dim);
+  border:1px solid var(--blue);
+  border-radius:12px;
+  color:var(--blue);
+  font-size:0.85rem;
+  font-weight:500;
+}
+
+.skill-tag button {
+  background:none;
+  border:none;
+  color:inherit;
+  cursor:pointer;
+  font-size:1rem;
+  padding:0;
+}
+
+.color-picker-group {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+
+.color-picker {
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+}
+
+.color-picker input[type="color"] {
+  width:50px;
+  height:50px;
+  border:2px solid var(--border);
+  border-radius:var(--radius-md);
+  cursor:pointer;
+}
+
+.color-picker label {
+  margin:0;
+  text-transform:none;
+  font-weight:500;
+}
+
+.form-actions {
+  display:flex;
+  gap:1rem;
+  margin-top:2rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--border);
+}
+
+.btn-generate,
+.btn-reset {
+  flex:1;
+  padding:1rem 1.5rem;
+  border:none;
+  border-radius:var(--radius-md);
+  font-weight:600;
+  font-size:0.95rem;
+  cursor:pointer;
+  transition:all var(--transition-md);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.btn-generate {
+  background:linear-gradient(135deg,var(--cyan),var(--blue));
+  color:#fff;
+}
+
+.btn-generate:hover {
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(0,212,255,.3);
+}
+
+.btn-reset {
+  background:var(--surface2);
+  color:var(--text-muted);
+  border:1px solid var(--border);
+}
+
+.btn-reset:hover {
+  border-color:var(--text-muted);
+  color:var(--text);
+}
+
+/* ── PREVIEW SECTION ── */
+.preview-section {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+  position:sticky;
+  top:2rem;
+}
+
+.preview-section h2 {
+  font-size:1.3rem;
+  color:var(--cyan);
+  margin-bottom:1.5rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+
+.preview-portfolio {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:1.5rem;
+  margin-bottom:1.5rem;
+  min-height:400px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--text-muted);
+}
+
+.portfolio-preview {
+  width:100%;
+  text-align:left;
+}
+
+.portfolio-preview-header {
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  margin-bottom:2rem;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid var(--border);
+}
+
+.portfolio-preview-avatar {
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:var(--bg3);
+  border:2px solid var(--border);
+  overflow:hidden;
+}
+
+.portfolio-preview-avatar img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.portfolio-preview-info h3 {
+  font-size:1.2rem;
+  margin-bottom:0.25rem;
+}
+
+.portfolio-preview-info p {
+  color:var(--text-muted);
+  font-size:0.9rem;
+}
+
+.portfolio-preview-content {
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+
+.preview-section-title {
+  font-size:0.9rem;
+  color:var(--cyan);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  margin-bottom:0.5rem;
+}
+
+.preview-skills {
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+
+.preview-skill-tag {
+  font-size:0.8rem;
+  padding:0.3rem 0.7rem;
+  background:var(--blue-dim);
+  border:1px solid var(--blue);
+  border-radius:8px;
+  color:var(--blue);
+}
+
+/* ── MEMBERSHIP CARD SECTION ── */
+.membership-card-section {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+  margin-top:2rem;
+}
+
+.membership-card-section h2 {
+  font-size:1.3rem;
+  color:var(--cyan);
+  margin-bottom:1.5rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+
+.membership-card {
+  background:linear-gradient(135deg,var(--surface2),var(--bg3));
+  border:2px solid var(--border-bright);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+  margin-bottom:2rem;
+  max-width:400px;
+  margin-left:auto;
+  margin-right:auto;
+  aspect-ratio:16/10;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+}
+
+.membership-card::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(59,123,255,.1),rgba(0,212,255,.05));
+  pointer-events:none;
+}
+
+.membership-card-inner {
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+.card-top {
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1rem;
+}
+
+.card-logo {
+  font-size:1.2rem;
+  font-weight:900;
+  color:var(--cyan);
+  font-family:'Orbitron',monospace;
+}
+
+.card-company {
+  font-size:0.75rem;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.card-avatar {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:var(--bg3);
+  border:1px solid var(--border-bright);
+  overflow:hidden;
+}
+
+.card-avatar img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card-middle {
+  flex-grow:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.card-name {
+  font-size:1rem;
+  font-weight:700;
+  margin-bottom:0.25rem;
+  background:linear-gradient(135deg,var(--cyan),var(--blue));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.card-role {
+  font-size:0.8rem;
+  color:var(--text-muted);
+  margin-bottom:0.75rem;
+}
+
+.card-bottom {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:1rem;
+  border-top:1px solid var(--border);
+}
+
+.card-qr {
+  width:80px;
+  height:80px;
+  background:#fff;
+  border-radius:var(--radius-sm);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px;
+}
+
+.card-qr canvas {
+  max-width:100%;
+  max-height:100%;
+}
+
+.card-info {
+  flex:1;
+  margin-left:1rem;
+}
+
+.card-website {
+  font-size:0.7rem;
+  color:var(--text-muted);
+  word-break:break-all;
+}
+
+.card-buttons {
+  display:flex;
+  gap:1rem;
+  margin-top:2rem;
+}
+
+.btn-download,
+.btn-share {
+  flex:1;
+  padding:0.85rem 1.5rem;
+  border:none;
+  border-radius:var(--radius-md);
+  font-weight:600;
+  font-size:0.9rem;
+  cursor:pointer;
+  transition:all var(--transition-md);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.btn-download {
+  background:linear-gradient(135deg,var(--green),var(--cyan));
+  color:#fff;
+}
+
+.btn-download:hover {
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(0,230,118,.3);
+}
+
+.btn-share {
+  background:var(--surface2);
+  color:var(--text-muted);
+  border:1px solid var(--border);
+}
+
+.btn-share:hover {
+  border-color:var(--cyan);
+  color:var(--cyan);
+}
+
+/* ── DEPLOYMENT STATUS ── */
+.deployment-status {
+  background:linear-gradient(135deg,rgba(0,230,118,.1),rgba(0,212,255,.05));
+  border:1px solid var(--green);
+  border-radius:var(--radius-md);
+  padding:1rem;
+  margin-top:1rem;
+}
+
+.deployment-status.success {
+  border-color:var(--green);
+}
+
+.deployment-status.error {
+  background:linear-gradient(135deg,rgba(255,59,164,.1),rgba(255,59,164,.05));
+  border-color:var(--pink);
+}
+
+.deployment-message {
+  color:var(--text);
+  font-size:0.9rem;
+}
+
+.deployment-url {
+  color:var(--cyan);
+  font-weight:600;
+  word-break:break-all;
+  margin-top:0.5rem;
+}
+
+/* ── TOAST ── */
+.toast {
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  background:var(--green);
+  color:#fff;
+  padding:1rem 1.5rem;
+  border-radius:var(--radius-md);
+  font-weight:600;
+  font-size:0.9rem;
+  display:none;
+  z-index:3000;
+  animation:slideInUp 0.3s ease-out;
+  box-shadow:0 12px 30px rgba(0,230,118,.3);
+}
+
+.toast.error {
+  background:var(--pink);
+  box-shadow:0 12px 30px rgba(255,59,164,.3);
+}
+
+@keyframes slideInUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ── LOADING STATE ── */
+.loading {
+  display:inline-block;
+  width:16px;
+  height:16px;
+  border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform:rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="container">
+    <h1>Portfolio Builder</h1>
+    <p>Create a personalized portfolio and get your PixelForge Tech membership card</p>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="container">
+  <div class="builder-layout">
+    <!-- ── FORM SECTION ── -->
+    <div class="form-section">
+      <h2>Your Information</h2>
+      <form id="portfolioForm">
+        <!-- Personal Information -->
+        <h3 style="margin:1.5rem 0 1rem;color:var(--cyan);font-size:0.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Personal Information</h3>
+
+        <div class="form-row">
+          <div class="form-group required">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required>
+          </div>
+          <div class="form-group required">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group required">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+          <div class="form-group required">
+            <label for="location">Location (City, Country)</label>
+            <input type="text" id="location" name="location" required>
+          </div>
+        </div>
+
+        <div class="form-group required">
+          <label for="profilePic">Profile Picture</label>
+          <div class="file-upload">
+            <input type="file" id="profilePic" name="profilePic" accept="image/*" required onchange="handleProfilePicture(this)">
+            <label for="profilePic" class="file-upload-label">
+              <span>📸</span>
+              <span id="picFileName">Click to upload profile picture</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Technical Information -->
+        <h3 style="margin:1.5rem 0 1rem;color:var(--cyan);font-size:0.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Technical Information</h3>
+
+        <div class="form-group required">
+          <label for="githubURL">GitHub Profile URL</label>
+          <input type="url" id="githubURL" name="githubURL" placeholder="https://github.com/yourprofile" required>
+        </div>
+
+        <div class="form-group required">
+          <label for="career">Desired Tech Career</label>
+          <select id="career" name="career" required>
+            <option value="">Select a career</option>
+            <option value="Front-End Developer">Front-End Developer</option>
+            <option value="Back-End Developer">Back-End Developer</option>
+            <option value="Full-Stack Developer">Full-Stack Developer</option>
+            <option value="Web Designer">Web Designer</option>
+            <option value="UX/UI Designer">UX/UI Designer</option>
+            <option value="Mobile Web Developer">Mobile Web Developer</option>
+            <option value="DevOps Engineer">DevOps Engineer</option>
+            <option value="Cloud Engineer">Cloud Engineer</option>
+            <option value="Cybersecurity Specialist">Cybersecurity Specialist</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Skills</label>
+          <div class="skills-input">
+            <input type="text" id="skillInput" placeholder="Add a skill (e.g., React, Node.js)">
+            <button type="button" onclick="addSkill()">Add</button>
+          </div>
+          <div class="skills-tags" id="skillsTags"></div>
+        </div>
+
+        <!-- Theme Customization -->
+        <h3 style="margin:1.5rem 0 1rem;color:var(--cyan);font-size:0.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Theme Colors</h3>
+
+        <div class="color-picker-group">
+          <div class="color-picker">
+            <input type="color" id="primaryColor" name="primaryColor" value="#3b7bff">
+            <label for="primaryColor">Primary</label>
+          </div>
+          <div class="color-picker">
+            <input type="color" id="secondaryColor" name="secondaryColor" value="#9d5cff">
+            <label for="secondaryColor">Secondary</label>
+          </div>
+          <div class="color-picker">
+            <input type="color" id="bgColor" name="bgColor" value="#080810">
+            <label for="bgColor">Background</label>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn-generate" onclick="generatePortfolio()">Generate Portfolio</button>
+          <button type="reset" class="btn-reset">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ── PREVIEW SECTION ── -->
+    <div class="preview-section">
+      <h2>Preview</h2>
+      <div class="preview-portfolio" id="portfolioPreview">
+        <p>Fill in the form to see your portfolio preview</p>
+      </div>
+
+      <!-- Deployment Status -->
+      <div id="deploymentStatus" style="display:none;"></div>
+
+      <!-- Membership Card Section -->
+      <div class="membership-card-section" id="membershipCardSection" style="display:none;">
+        <h2>Your Membership Card</h2>
+        <div class="membership-card" id="membershipCard">
+          <div class="membership-card-inner">
+            <div class="card-top">
+              <div>
+                <div class="card-logo">PF</div>
+                <div class="card-company">PixelForge Tech</div>
+              </div>
+              <div class="card-avatar" id="cardAvatarContainer"></div>
+            </div>
+            <div class="card-middle">
+              <div class="card-name" id="cardName">Developer Name</div>
+              <div class="card-role" id="cardRole">Career Role</div>
+            </div>
+            <div class="card-bottom">
+              <div class="card-qr" id="qrCode"></div>
+              <div class="card-info">
+                <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.25rem;text-transform:uppercase;letter-spacing:.05em;">Portfolio</div>
+                <div class="card-website" id="cardWebsite">www.portfolio.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-buttons">
+          <button class="btn-download" onclick="downloadMembershipCard()">💾 Download Card</button>
+          <button class="btn-share" onclick="shareMembershipCard()">📤 Share</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST NOTIFICATION ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── SKILL MANAGEMENT ── 
+let skills = [];
+
+function addSkill() {
+  const input = document.getElementById('skillInput');
+  const skill = input.value.trim();
+  
+  if (!skill) {
+    showToast('Please enter a skill', 'error');
+    return;
+  }
+  
+  if (skills.includes(skill)) {
+    showToast('Skill already added', 'error');
+    return;
+  }
+  
+  skills.push(skill);
+  input.value = '';
+  renderSkillTags();
+  updatePortfolioPreview();
+}
+
+function removeSkill(skill) {
+  skills = skills.filter(s => s !== skill);
+  renderSkillTags();
+  updatePortfolioPreview();
+}
+
+function renderSkillTags() {
+  const container = document.getElementById('skillsTags');
+  container.innerHTML = skills.map(skill => `
+    <div class="skill-tag">
+      ${skill}
+      <button type="button" onclick="removeSkill('${skill}')">✕</button>
+    </div>
+  `).join('');
+}
+
+// ── PROFILE PICTURE HANDLING ── 
+let profilePictureData = null;
+
+function handleProfilePicture(input) {
+  const file = input.files[0];
+  if (file) {
+    document.getElementById('picFileName').textContent = file.name;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      profilePictureData = e.target.result;
+      updatePortfolioPreview();
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// ── PORTFOLIO PREVIEW ── 
+function updatePortfolioPreview() {
+  const fullName = document.getElementById('fullName').value || 'Your Name';
+  const location = document.getElementById('location').value || 'City, Country';
+  const career = document.getElementById('career').value || 'Tech Professional';
+  
+  const skillsHtml = skills.map(skill => 
+    `<span class="preview-skill-tag">${skill}</span>`
+  ).join('');
+  
+  const avatarHtml = profilePictureData 
+    ? `<img src="${profilePictureData}" alt="Profile">` 
+    : '<span style="font-size:2rem;">👤</span>';
+  
+  const preview = `
+    <div class="portfolio-preview">
+      <div class="portfolio-preview-header">
+        <div class="portfolio-preview-avatar">${avatarHtml}</div>
+        <div class="portfolio-preview-info">
+          <h3>${fullName}</h3>
+          <p>${career}</p>
+          <p style="font-size:0.85rem;">${location}</p>
+        </div>
+      </div>
+      <div class="portfolio-preview-content">
+        <div>
+          <div class="preview-section-title">Skills</div>
+          <div class="preview-skills">${skillsHtml || '<span style="color:var(--text-faint);">Add skills to get started</span>'}</div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('portfolioPreview').innerHTML = preview;
+}
+
+// ── FORM VALIDATION ── 
+function validateForm() {
+  const fullName = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const location = document.getElementById('location').value.trim();
+  const github = document.getElementById('githubURL').value.trim();
+  const career = document.getElementById('career').value;
+  
+  if (!fullName) { showToast('Please enter your full name', 'error'); return false; }
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email', 'error'); return false; }
+  if (!phone) { showToast('Please enter your phone number', 'error'); return false; }
+  if (!location) { showToast('Please enter your location', 'error'); return false; }
+  if (!profilePictureData) { showToast('Please upload a profile picture', 'error'); return false; }
+  if (!github) { showToast('Please provide your GitHub profile URL', 'error'); return false; }
+  if (!career) { showToast('Please select a career', 'error'); return false; }
+  
+  return true;
+}
+
+// ── PORTFOLIO GENERATION ── 
+function generatePortfolio() {
+  if (!validateForm()) return;
+  
+  const fullName = document.getElementById('fullName').value;
+  const email = document.getElementById('email').value;
+  const career = document.getElementById('career').value;
+  const github = document.getElementById('githubURL').value;
+  const primaryColor = document.getElementById('primaryColor').value;
+  const secondaryColor = document.getElementById('secondaryColor').value;
+  const bgColor = document.getElementById('bgColor').value;
+  
+  // Generate unique portfolio URL
+  const portfolioId = btoa(email).replace(/[^a-zA-Z0-9]/g, '').substring(0, 12);
+  const portfolioURL = `https://pixelforge-portfolio.vercel.app/${portfolioId}`;
+  
+  // Store portfolio data
+  const portfolioData = {
+    fullName,
+    email,
+    location: document.getElementById('location').value,
+    career,
+    skills,
+    github,
+    profilePicture: profilePictureData,
+    primaryColor,
+    secondaryColor,
+    bgColor,
+    portfolioURL,
+    id: portfolioId,
+    createdAt: new Date().toISOString()
+  };
+  
+  // Save to localStorage
+  localStorage.setItem(`portfolio_${portfolioId}`, JSON.stringify(portfolioData));
+  
+  // Show deployment status
+  showDeploymentStatus(portfolioURL);
+  
+  // Generate membership card
+  generateMembershipCard(portfolioData, portfolioURL);
+  
+  showToast('✓ Portfolio generated successfully!');
+}
+
+function showDeploymentStatus(url) {
+  const status = document.getElementById('deploymentStatus');
+  status.innerHTML = `
+    <div class="deployment-status success">
+      <div class="deployment-message">🚀 Portfolio deployed successfully!</div>
+      <div class="deployment-url"><a href="${url}" target="_blank" style="color:var(--cyan);text-decoration:none;">${url}</a></div>
+    </div>
+  `;
+  status.style.display = 'block';
+}
+
+// ── MEMBERSHIP CARD GENERATION ── 
+function generateMembershipCard(portfolioData, portfolioURL) {
+  const { fullName, career, profilePicture } = portfolioData;
+  
+  // Update card display
+  document.getElementById('cardName').textContent = fullName;
+  document.getElementById('cardRole').textContent = career;
+  document.getElementById('cardWebsite').textContent = portfolioURL.replace('https://', '');
+  
+  // Set avatar
+  if (profilePicture) {
+    document.getElementById('cardAvatarContainer').innerHTML = 
+      `<img src="${profilePicture}" alt="Profile">`;
+  }
+  
+  // Generate QR code
+  const qrContainer = document.getElementById('qrCode');
+  qrContainer.innerHTML = '';
+  new QRCode(qrContainer, {
+    text: portfolioURL,
+    width: 80,
+    height: 80,
+    colorDark: '#000000',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  
+  // Show membership card section
+  document.getElementById('membershipCardSection').style.display = 'block';
+}
+
+// ── MEMBERSHIP CARD DOWNLOAD ── 
+function downloadMembershipCard() {
+  const card = document.getElementById('membershipCard');
+  const button = event.target;
+  const originalText = button.textContent;
+  
+  button.textContent = '⏳ Generating...';
+  button.disabled = true;
+  
+  setTimeout(() => {
+    html2canvas(card, {
+      backgroundColor: null,
+      scale: 2,
+      useCORS: true
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `PixelForge-MembershipCard-${Date.now()}.png`;
+      link.click();
+      
+      button.textContent = originalText;
+      button.disabled = false;
+      showToast('✓ Membership card downloaded!');
+    }).catch(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+      showToast('Failed to download card', 'error');
+    });
+  }, 500);
+}
+
+// ── SHARE MEMBERSHIP CARD ── 
+function shareMembershipCard() {
+  const fullName = document.getElementById('fullName').value;
+  const shareText = `Check out my portfolio and PixelForge Tech membership card! Join the collective of tech innovators. 🚀`;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: 'My PixelForge Tech Portfolio',
+      text: shareText,
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(shareText);
+    showToast('Share text copied to clipboard!');
+  }
+}
+
+// ── TOAST NOTIFICATION ── 
+function showToast(message, type = 'success') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = `toast ${type === 'error' ? 'error' : ''}`;
+  toast.style.display = 'block';
+  
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 3000);
+}
+
+// ── EVENT LISTENERS ── 
+document.getElementById('skillInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    addSkill();
+  }
+});
+
+document.getElementById('fullName').addEventListener('input', updatePortfolioPreview);
+document.getElementById('location').addEventListener('input', updatePortfolioPreview);
+document.getElementById('career').addEventListener('change', updatePortfolioPreview);
+document.getElementById('primaryColor').addEventListener('change', updatePortfolioPreview);
+
+// Initialize
+updatePortfolioPreview();
+</script>
+
+</body>
+</html>
