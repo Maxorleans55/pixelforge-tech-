@@ -1,6 +1,6 @@
 ## PixelForge Tech
 
-> **The Digital Home for Creators** — A cyberpunk-dark themed single-page web app for the PixelForge Tech community channel.
+> **The Digital Home for Creators** — A custom web app for my virtual tech company 
 
 ![PixelForge Tech](assets/images/preview-placeholder.png)
 
