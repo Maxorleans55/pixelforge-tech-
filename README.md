@@ -4,7 +4,7 @@
 
 ![PixelForge Tech](assets/images/preview-placeholder.png)
 
-## 🚀 Live Demo
+ Live Demo
 
 👉 [View Site](https://maxorleans55.github.io/pixelforge-tech/)
 
