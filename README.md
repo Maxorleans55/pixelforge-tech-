@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 ![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
 
-**A Cyberpunk-Themed Developer Community Platform**
+**A virtual tech company for all developers at the University**
 
 [Community Website](https://pixelforge.tech) | [Join WhatsApp](https://pixelforge.tech) | [Follow Telegram](https://pixelforge.tech) | [GitHub](https://github.com/pixelforge-tech)
 
@@ -380,39 +380,9 @@ We're committed to making PixelForge accessible to everyone:
 
 ---
 
-## Frequently Asked Questions
 
-**Q: How do I join the community?**
-A: Visit our website and fill out the application form. We'll review your application and add you to our community channels within 24-48 hours.
 
-**Q: What are the membership requirements?**
-A: We welcome developers of all skill levels. Just show genuine interest in learning and contributing to the community.
 
-**Q: Can I attend events without being a member?**
-A: Some events may be open to non-members, but full access to exclusive events and resources requires membership.
-
-**Q: How do I report issues or suggest features?**
-A: Open an issue on our GitHub repository or contact our community moderators.
-
-**Q: Is there a membership fee?**
-A: No, PixelForge is a free community platform.
-
-**Q: How can I contribute to the project?**
-A: Check our Contributing section above for guidelines on code, design, and content contributions.
-
----
-
-## Analytics & Metrics
-
-<div align="center">
-
-**Visitor Counter** (Track your engagement)
-
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=pixelforge-tech.pixelforge)
-
-</div>
-
----
 
 ## Resources
 
@@ -497,19 +467,6 @@ We want to thank:
 <div align="center">
 
 **Join the PixelForge Tech community today and start your journey with us!**
-
-Built with passion by the PixelForge Tech community.
-
-```
-    _____ _ _     _____ _____ 
-   |  __ (_) |   |  ___|  ___|
-   | |  \/_| |_  | |_  | |_   
-   | | __ | | |  |  _| |  _|  
-   | |_\ \| | |  | |_  | |_   
-    \____/|_|_|  |_|_| |___|  
-```
-
----
 
 *Last Updated: June 2026*
 
