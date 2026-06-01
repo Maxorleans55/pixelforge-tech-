@@ -8,7 +8,7 @@
 
 **A virtual tech company for all developers at the various universities in Ghana 🇬🇭**
 
-[Community Website](https://pixelforge.tech) | [Join WhatsApp]https://whatsapp.com/channel/0029Vb6rpEcBVJl1VDOy323z | [Follow Telegram](https://pixelforge.tech) | [GitHub](https://github.com/pixelforge-tech)
+[Community Website](https://pixelforge.tech) | [Join WhatsApp](https://whatsapp.com/channel/0029Vb6rpEcBVJl1VDOy323z) | [Follow Telegram](https://pixelforge.tech) | [GitHub](https://github.com/pixelforge-tech)
 
 ---
 
