@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 ![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
 
-**A virtual tech company for all developers at the University**
+**A virtual tech company for all developers at the various universities in Ghana 🇬🇭**
 
 [Community Website](https://pixelforge.tech) | [Join WhatsApp](https://pixelforge.tech) | [Follow Telegram](https://pixelforge.tech) | [GitHub](https://github.com/pixelforge-tech)
 
